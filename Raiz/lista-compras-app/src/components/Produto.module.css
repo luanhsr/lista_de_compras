@@ -1,0 +1,159 @@
+/* Produto.module.css */
+.produtoRow {
+  display: flex;
+  align-items: center;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  border-bottom: 1px solid var(--cor-borda-sutil);
+  gap: var(--espacamento-md);
+  background-color: var(--cor-fundo-secundario);
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+  flex-wrap: wrap; 
+}
+.produtoRow:last-child {
+  border-bottom: none;
+}
+
+.produtoRow.comprado {
+  background-color: var(--cor-fundo-produto-comprado);
+}
+.produtoRow.comprado .inputField,
+.produtoRow.comprado .selectField,
+.produtoRow.comprado .label,
+.produtoRow.comprado .valorCalculado {
+  color: var(--cor-texto-desabilitado);
+}
+.produtoRow.comprado .inputField,
+.produtoRow.comprado .selectField {
+  background-color: var(--cor-fundo-produto-comprado);
+  border-color: var(--cor-borda-sutil);
+}
+
+.label {
+  font-size: 0.75em; color: var(--cor-texto-secundario); display: block;
+  margin-bottom: var(--espacamento-xs); text-align: left; font-weight: var(--peso-fonte-normal);
+}
+
+.inputField, .selectField {
+  padding: 6px 10px; border: 1px solid var(--cor-borda-input); border-radius: var(--raio-borda-padrao);
+  font-size: 0.9em; box-sizing: border-box; background-color: var(--cor-fundo-terciario);
+  color: var(--cor-texto-primario); width: 100%;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.inputField:focus, .selectField:focus {
+  outline: none; border-color: var(--cor-borda-input-foco);
+  box-shadow: 0 0 0 0.2rem var(--cor-foco-sombra);
+  background-color: var(--cor-fundo-secundario);
+}
+
+.inputNumber { text-align: right; }
+
+.colunaNome { flex: 3; min-width: 120px; }
+.colunaQtd { flex: 0.8; min-width: 65px; }
+.colunaPrecoUnitario { flex: 1; min-width: 75px; }
+.colunaPrecoTotal { flex: 1; min-width: 85px; }
+.colunaMarcaNome { flex: 1.5; min-width: 100px; }
+.colunaMarcaQualidade { flex: 1; min-width: 90px; }
+
+.areaAcoes {
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-sm);
+  margin-left: auto; /* Empurra a área de ações para a direita no desktop */
+}
+
+/* Contêineres de colunas com label */
+.colunaQtd, .colunaPrecoUnitario, .colunaPrecoTotal, .colunaMarcaNome, .colunaMarcaQualidade {
+  display: flex; flex-direction: column;
+}
+.colunaPrecoTotal { align-items: flex-start; }
+.colunaPrecoTotal .valorCalculado {
+  font-weight: var(--peso-fonte-destacado); font-size: 0.9em;
+  color: var(--cor-texto-primario); padding: 7px 0;
+  text-align: right; width: 100%;
+}
+.colunaMarcaQualidade .selectField { padding: 6px 4px; }
+
+/* Estilos de Qualidade e Select (sem alterações) */
+.selectField.marcaBoa { background-color: var(--cor-sucesso-fundo-tag) !important; color: var(--cor-sucesso-texto-tag) !important; border-color: var(--cor-sucesso-texto-tag) !important; }
+.selectField.marcaRuim { background-color: var(--cor-erro-fundo-tag) !important; color: var(--cor-erro-texto-tag) !important; border-color: var(--cor-erro-texto-tag) !important; }
+.selectField.marcaNaoSei { background-color: var(--cor-aviso-fundo-tag) !important; color: var(--cor-aviso-texto-tag) !important; border-color: var(--cor-aviso-texto-tag) !important; }
+.selectField { appearance: none; -webkit-appearance: none; -moz-appearance: none; background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23B3B3B3%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right .7em top 50%; background-size: .6em auto; padding-right: var(--espacamento-lg); }
+
+.compraContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-sm);
+  padding: 4px 8px;
+  border: 1px solid var(--cor-borda-input);
+  border-radius: var(--raio-borda-padrao);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+.produtoRow:not(.comprado) .compraContainer:hover {
+  border-color: var(--cor-acento-primario);
+  background-color: var(--cor-fundo-terciario);
+}
+.compraLabel {
+  font-size: 0.8rem;
+  color: var(--cor-texto-secundario);
+  font-style: italic;
+}
+.checkbox {
+  width: 18px; height: 18px; cursor: pointer;
+  accent-color: var(--cor-acento-primario);
+}
+.produtoRow.comprado .compraContainer {
+  border-color: transparent;
+}
+
+/* Botão de ação genérico (para Save e Delete) */
+.actionButton {
+  background: none; border: none; cursor: pointer;
+  padding: var(--espacamento-xs); font-size: 1.2em;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.actionButton:disabled {
+  color: var(--cor-texto-desabilitado);
+  cursor: not-allowed;
+  transform: none;
+}
+.saveButton { color: var(--cor-acento-primario); }
+.saveButton:hover:not(:disabled) { color: var(--cor-acento-primario-hover); transform: scale(1.1); }
+.deleteButton { color: var(--cor-erro); }
+.deleteButton:hover:not(:disabled) { color: var(--cor-erro-hover); transform: scale(1.1); }
+
+/* ------------------------------------------- */
+/* --- SEÇÃO DE RESPONSIVIDADE (2 LINHAS) --- */
+/* ------------------------------------------- */
+
+/* Para tablets e smartphones (largura até 768px) */
+@media (max-width: 768px) {
+  .produtoRow {
+    gap: var(--espacamento-sm);
+  }
+
+  /* Linha Superior */
+  .colunaNome {
+    order: 1;
+    flex: 1 1 100%; /* Ocupa a largura toda na primeira linha */
+  }
+
+  /* Linha Inferior - Detalhes */
+  .colunaQtd, .colunaPrecoUnitario, .colunaPrecoTotal,
+  .colunaMarcaNome, .colunaMarcaQualidade {
+    order: 2;
+    flex-grow: 1;
+    margin-top: var(--espacamento-sm);
+    min-width: 65px;
+  }
+  
+  /* Linha Final - Ações */
+  .areaAcoes {
+    order: 3;
+    width: 100%; /* Ocupa a largura toda */
+    justify-content: flex-end; /* Alinha as ações à direita */
+    margin-top: var(--espacamento-md);
+    margin-left: 0; /* Reseta o margin-left do desktop */
+  }
+}

@@ -1,0 +1,14 @@
+/* src/components/ListContainer.module.css */
+.listasMainContainer {
+  padding: var(--espacamento-md) 0;
+}
+
+.nenhumaListaMsg {
+  text-align: center;
+  color: var(--cor-texto-secundario);
+  margin-top: var(--espacamento-xl);
+  padding: var(--espacamento-lg);
+  font-style: italic;
+  background-color: var(--cor-fundo-secundario);
+  border-radius: var(--raio-borda-padrao);
+}

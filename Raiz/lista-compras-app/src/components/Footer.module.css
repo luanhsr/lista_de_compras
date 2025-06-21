@@ -1,0 +1,83 @@
+/* src/components/Footer.module.css */
+.appFooter {
+  width: 100%;
+  padding: var(--espacamento-md) var(--espacamento-lg);
+  margin-top: var(--espacamento-xl);
+  border-top: 1px solid var(--cor-borda-sutil);
+  background-color: var(--cor-fundo-principal);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: var(--espacamento-md);
+  flex-wrap: wrap;
+}
+
+.footerItem {
+  background-color: var(--cor-fundo-secundario);
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  border-radius: var(--raio-borda-padrao);
+  color: var(--cor-texto-secundario);
+  font-size: var(--tamanho-fonte-pequena);
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.valorDestaque {
+  color: var(--cor-sucesso);
+  font-weight: var(--peso-fonte-destacado);
+  font-size: 1.1em;
+  margin-left: var(--espacamento-xs);
+}
+
+.editable {
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.5s, color 0.5s;
+  transform-origin: center;
+}
+
+.editable:hover {
+  background-color: var(--cor-fundo-terciario);
+}
+
+@keyframes pulse-orange {
+  0% { transform: scale(1); background-color: var(--cor-acento-secundario); }
+  50% { transform: scale(1.05); background-color: var(--cor-acento-secundario-hover); }
+  100% { transform: scale(1); background-color: var(--cor-acento-secundario); }
+}
+
+@keyframes pulse-red {
+  0% { transform: scale(1); background-color: var(--cor-erro); }
+  50% { transform: scale(1.08); background-color: var(--cor-erro-hover); }
+  100% { transform: scale(1); background-color: var(--cor-erro); }
+}
+
+/* Estado de Aviso (Laranja) */
+.teto-aviso {
+  animation: pulse-orange 2s infinite ease-in-out;
+  color: var(--cor-aviso-texto) !important;
+  font-weight: bold;
+}
+.teto-aviso .valorDestaque {
+  color: inherit;
+}
+
+/* Estado Crítico (Vermelho) */
+.teto-critico {
+  animation: pulse-red 1s infinite ease-in-out;
+  color: var(--cor-erro-texto-forte) !important;
+  font-weight: bold;
+}
+.teto-critico .valorDestaque {
+  color: inherit;
+}
+
+/* Estado Estourado (Vermelho Fixo) */
+.teto-estourado {
+  background-color: #b71c1c;
+  animation: pulse-red 0.8s infinite ease-in-out;
+  color: var(--cor-erro-texto-forte) !important;
+  font-weight: bold;
+}
+.teto-estourado .valorDestaque {
+  color: inherit;
+}

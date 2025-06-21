@@ -1,0 +1,113 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  /* text-align: center; Removido para não forçar centralização de tudo */
+}
+
+:root {
+  /* Cores Base para o Tema DARK */
+  --cor-fundo-principal: #121212;
+  --cor-fundo-secundario: #1e1e1e;
+  --cor-fundo-terciario: #2a2a2a;
+  --cor-fundo-overlay: rgba(0, 0, 0, 0.7);
+
+  /* Cores de Texto */
+  --cor-texto-primario: #e0e0e0;
+  --cor-texto-secundario: #b3b3b3;
+  --cor-texto-destaque: #ffffff;
+  --cor-texto-invertido: #121212;
+  --cor-texto-desabilitado: #757575;
+
+  /* Cores de Acento */
+  --cor-acento-primario: #00bcd4;
+  --cor-acento-primario-hover: #0097a7;
+  --cor-acento-secundario: #ff9800;
+  --cor-acento-secundario-hover: #f57c00;
+
+  /* Cores de Feedback (Status) */
+  --cor-sucesso: #4caf50;
+  --cor-sucesso-hover: #388e3c;
+  --cor-sucesso-fundo: #2e7d32;
+  --cor-sucesso-texto: #e8f5e9;
+
+  --cor-aviso: #ffeb3b;
+  --cor-aviso-hover: #fbc02d;
+  --cor-aviso-fundo: #fff9c4;
+  --cor-aviso-texto: #212121;
+
+  --cor-erro: #f44336;
+  --cor-erro-hover: #d32f2f;
+  --cor-erro-fundo: #ffcdd2;
+  --cor-erro-texto: #c62828;
+  --cor-erro-texto-forte: #ffffff;
+
+  /* Cores para Tags de Qualidade (Produto) */
+  --cor-sucesso-fundo-tag: #1b5e20;
+  --cor-sucesso-texto-tag: #c8e6c9;
+  --cor-erro-fundo-tag: #b71c1c;
+  --cor-erro-texto-tag: #ffcdd2;
+  --cor-aviso-fundo-tag: #424242;
+  --cor-aviso-texto-tag: #e0e0e0;
+
+  /* Bordas */
+  --raio-borda-padrao: 6px;
+  --cor-borda-sutil: #333333;
+  --cor-borda-input: #555555;
+  --cor-borda-input-foco: var(--cor-acento-primario);
+  --cor-foco-sombra: rgba(0, 188, 212, 0.25);
+
+  /* UI Específico */
+  --cor-header-fundo-lista: var(--cor-fundo-terciario);
+  --cor-fundo-produto-comprado: #2c2c2c;
+
+  /* Tipografia */
+  --fonte-principal: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --tamanho-fonte-base: 16px;
+  --tamanho-fonte-pequena: 0.875rem; /* 14px */
+  --tamanho-fonte-grande: 1.25rem;  /* 20px */
+  --tamanho-fonte-h1: 2.5rem;
+  --tamanho-fonte-h2: 2rem;
+  --tamanho-fonte-h3: 1.75rem;
+  --peso-fonte-normal: 400;
+  --peso-fonte-destacado: 600;
+  --peso-fonte-bold: 700;
+
+  /* Espaçamentos */
+  --espacamento-xs: 4px;
+  --espacamento-sm: 8px;
+  --espacamento-md: 16px;
+  --espacamento-lg: 24px;
+  --espacamento-xl: 32px;
+}
+
+body {
+  margin: 0;
+  font-family: var(--fonte-principal);
+  background-color: var(--cor-fundo-principal);
+  color: var(--cor-texto-primario);
+  font-size: var(--tamanho-fonte-base);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--cor-texto-destaque);
+  font-weight: var(--peso-fonte-bold);
+  margin-top: var(--espacamento-lg);
+  margin-bottom: var(--espacamento-md);
+}
+* {
+  box-sizing: border-box;
+}
+
+a {
+  color: var(--cor-acento-primario);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: var(--cor-acento-secundario);
+}
+
+/* Estilos de Header e Footer foram movidos para seus respectivos arquivos CSS Module */

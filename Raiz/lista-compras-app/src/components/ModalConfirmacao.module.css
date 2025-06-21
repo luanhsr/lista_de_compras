@@ -1,0 +1,113 @@
+/* ModalConfirmacao.module.css */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cor-fundo-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--espacamento-md);
+}
+
+.modal-content {
+  background-color: var(--cor-fundo-secundario);
+  padding: var(--espacamento-lg);
+  border-radius: var(--raio-borda-padrao);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  text-align: center;
+  border: 1px solid var(--cor-borda-sutil);
+  
+
+  width: 90vw; 
+  max-width: 450px; 
+
+}
+
+.modal-content.delete {
+  background-color: var(--cor-erro-fundo); 
+  border: 1px solid var(--cor-erro);
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  margin-bottom: var(--espacamento-lg);
+  color: var(--cor-texto-primario); 
+}
+
+.modal-content.delete p {
+  color: var(--cor-erro-texto);
+  font-weight: var(--peso-fonte-destacado);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: var(--espacamento-md);
+}
+
+.modal-button {
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  border: 1px solid transparent;
+  border-radius: var(--raio-borda-padrao);
+  cursor: pointer;
+  font-weight: var(--peso-fonte-destacado);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+
+  font-size: 1rem;
+  flex-grow: 1; 
+  flex-basis: 0;
+}
+.modal-button.sim {
+  background-color: var(--cor-sucesso);
+  color: var(--cor-texto-destaque); 
+  border-color: var(--cor-sucesso);
+}
+.modal-button.sim:hover {
+  background-color: var(--cor-sucesso-hover);
+  border-color: var(--cor-sucesso-hover);
+}
+.modal-button.nao {
+  background-color: var(--cor-erro);
+  color: var(--cor-erro-texto-forte);
+  border-color: var(--cor-erro);
+}
+.modal-button.nao:hover {
+  background-color: var(--cor-erro-hover);
+  border-color: var(--cor-erro-hover);
+}
+.modal-content.delete .modal-button.sim {
+  background-color: var(--cor-erro);
+  color: var(--cor-erro-texto-forte); 
+  border-color: var(--cor-erro);
+}
+.modal-content.delete .modal-button.sim:hover {
+  background-color: var(--cor-erro-hover);
+  border-color: var(--cor-erro-hover);
+}
+.modal-button.neutro,
+.modal-content.delete .modal-button.nao { 
+  background-color: var(--cor-fundo-terciario); 
+  color: var(--cor-texto-primario);
+  border-color: var(--cor-borda-input);
+}
+.modal-button.neutro:hover,
+.modal-content.delete .modal-button.nao:hover {
+  background-color: var(--cor-borda-input); 
+  border-color: var(--cor-texto-secundario);
+  color: var(--cor-texto-destaque);
+}
+
+@media (max-width: 360px) {
+  .modal-content p {
+    font-size: 1rem; 
+  }
+
+  .modal-button {
+    padding: var(--espacamento-sm);
+    font-size: 0.9rem;
+  }
+}

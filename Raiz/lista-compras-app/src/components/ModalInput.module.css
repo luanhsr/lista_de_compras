@@ -1,0 +1,118 @@
+/* src/components/ModalInput.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cor-fundo-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--espacamento-md);
+}
+
+.modalContent {
+  background-color: var(--cor-fundo-secundario);
+  padding: var(--espacamento-lg);
+  border-radius: var(--raio-borda-padrao);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  border: 1px solid var(--cor-borda-sutil);
+  text-align: left;
+  width: 90vw; 
+  max-width: 500px;
+}
+
+.modalTitle {
+  font-size: 1.4rem;
+  font-weight: var(--peso-fonte-destacado);
+  color: var(--cor-texto-destaque);
+  margin-top: 0;
+  margin-bottom: var(--espacamento-md);
+  text-align: center;
+}
+
+.inputArea {
+  margin-bottom: var(--espacamento-lg);
+}
+
+.modalInputField {
+  width: 100%;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  font-size: 1.1rem;
+  border-radius: var(--raio-borda-padrao);
+  border: 1px solid var(--cor-borda-input);
+  background-color: var(--cor-fundo-terciario);
+  color: var(--cor-texto-primario);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modalInputField:focus {
+  outline: none;
+  border-color: var(--cor-acento-primario);
+  box-shadow: 0 0 0 3px var(--cor-foco-sombra);
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--espacamento-md);
+}
+
+.modalButton {
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  border-radius: var(--raio-borda-padrao);
+  cursor: pointer;
+  font-weight: var(--peso-fonte-destacado);
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  flex-grow: 1; 
+  flex-basis: 0;
+  max-width: 200px; 
+}
+
+.modalButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancel {
+  background-color: var(--cor-fundo-terciario);
+  color: var(--cor-texto-primario);
+  border-color: var(--cor-borda-input);
+}
+.cancel:hover:not(:disabled) {
+  background-color: var(--cor-borda-input);
+}
+
+.confirm {
+  background-color: var(--cor-sucesso);
+  color: var(--cor-texto-destaque);
+  border-color: var(--cor-sucesso);
+}
+.confirm:hover:not(:disabled) {
+  background-color: var(--cor-sucesso-hover);
+  border-color: var(--cor-sucesso-hover);
+}
+
+/* --- NOVO MEDIA QUERY para telas de smartphones --- */
+@media (max-width: 480px) {
+  .modalContent {
+    padding: var(--espacamento-md); /* Menos padding interno no modal */
+  }
+
+  .modalTitle {
+    font-size: 1.2rem; /* Título um pouco menor */
+  }
+
+  .modalActions {
+    /* Em telas pequenas, é comum esticar os botões */
+    justify-content: space-between;
+  }
+  
+  .modalButton {
+    max-width: none; /* Remove a largura máxima para que o flex-grow funcione livremente */
+  }
+}

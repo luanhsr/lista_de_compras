@@ -1,0 +1,78 @@
+/* src/components/Header.module.css */
+.appHeader {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--espacamento-md) var(--espacamento-lg);
+  background-color: var(--cor-fundo-secundario);
+  color: var(--cor-texto-primario);
+  border-bottom: 2px solid var(--cor-borda-sutil);
+  gap: var(--espacamento-md);
+}
+
+.profileIconContainer {
+  align-items: center;
+  cursor: pointer;
+}
+
+.profileIconBackground {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--cor-acento-primario);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.profileIconBackground:hover {
+  background-color: var(--cor-acento-primario-hover);
+  transform: scale(1.05);
+}
+
+.profileIcon {
+  font-size: 1.8rem;
+  color: var(--cor-texto-destaque);
+}
+
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: var(--espacamento-md);
+  flex-wrap: wrap;
+}
+
+.actionButton {
+  background-color: var(--cor-acento-primario);
+  color: var(--cor-texto-destaque);
+  border: none;
+  border-radius: var(--raio-borda-padrao);
+  padding: var(--espacamento-sm) var(--espacamento-lg);
+  font-size: 1rem;
+  font-weight: var(--peso-fonte-destacado);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-sm);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.actionButton:hover {
+  background-color: var(--cor-acento-primario-hover);
+  transform: translateY(-1px);
+}
+
+.actionButton:active {
+  transform: translateY(0px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.secondaryButton {
+  background-color: var(--cor-acento-secundario);
+}
+.secondaryButton:hover {
+  background-color: var(--cor-acento-secundario-hover);
+}
