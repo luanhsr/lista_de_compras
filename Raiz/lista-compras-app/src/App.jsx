@@ -1,12 +1,11 @@
 // src/App.jsx
 import React, { useState, useEffect } from 'react';
-import Header from './components/Header';
-import ListContainer from './components/ListContainer';
-import Footer from './components/Footer';
-import ModalConfirmacao from './components/ModalConfirmacao';
-import ModalInput from './components/ModalInput';
-// IMPORTAÇÃO CORRETA DO NOSSO NOVO COMPONENTE
-import SQLiteTest from "./test/SQLiteTest"; 
+import Header from './features/header/Header';
+import ListContainer from './features/list/ListContainer';
+import Footer from './features/footer/Footer';
+import ModalConfirmacao from './features/modal-confirmacao/ModalConfirmacao';
+import ModalInput from './features/modal-input/ModalInput';
+import SQLiteTest from "./test/SQLiteTest";
 
 import './App.css'; 
 
@@ -137,10 +136,7 @@ function App() {
 
   return (
     <div className="app-container">
-      {/* ===== INÍCIO DA SEÇÃO DE TESTE ===== */}
-      {/* Adicionei o componente de teste aqui no topo para fácil visualização */}
       <SQLiteTest />
-      {/* ===== FIM DA SEÇÃO DE TESTE ===== */}
       
       <Header
         onProfileClick={handleProfileClick}

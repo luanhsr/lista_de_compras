@@ -1,6 +1,6 @@
 // src/test/SQLiteTest.jsx
 import React, { useState, useEffect } from 'react';
-import { db } from '../data/db';
+import { addText, getAllTexts, updateText, deleteText } from './SQLiteTest.service';
 
 const SQLiteTest = () => {
   const [inputText, setInputText] = useState('');
@@ -12,8 +12,8 @@ const SQLiteTest = () => {
 
   const fetchSavedTexts = async () => {
     try {
-      const allTexts = await db.textos.toArray();
-      setSavedTexts(allTexts.reverse());
+      const texts = await getAllTexts();
+      setSavedTexts(texts);
     } catch (error) {
       console.error("Erro ao buscar textos:", error);
       setMessage('Falha ao carregar textos.');
@@ -25,24 +25,20 @@ const SQLiteTest = () => {
   }, []);
 
   const handleSaveText = async () => {
-    if (!inputText.trim()) {
-      setMessage('Por favor, digite um texto para salvar.');
-      return;
-    }
     try {
-      await db.textos.add({ texto: inputText });
+      await addText(inputText);
       setMessage(`Texto salvo com sucesso.`);
       setInputText('');
       fetchSavedTexts();
     } catch (error) {
       console.error("Erro ao salvar o texto:", error);
-      setMessage('Ocorreu um erro ao salvar o texto.');
+      setMessage(`Erro: ${error.message}`);
     }
   };
 
   const handleDeleteText = async (idToDelete) => {
     try {
-      await db.textos.delete(idToDelete);
+      await deleteText(idToDelete);
       setMessage('Texto excluído com sucesso.');
       fetchSavedTexts();
     } catch (error) {
@@ -62,18 +58,15 @@ const SQLiteTest = () => {
   };
 
   const handleUpdateText = async () => {
-    if (!editText.trim()) {
-      setMessage('O texto não pode ficar vazio.');
-      return;
-    }
     try {
-      await db.textos.update(editingId, { texto: editText });
+      await updateText(editingId, editText);
       setMessage('Texto atualizado com sucesso.');
       handleCancelEditing();
       fetchSavedTexts();
-    } catch (error) {
+    } catch (error)
+    {
       console.error("Erro ao atualizar texto:", error);
-      setMessage('Falha ao atualizar o texto.');
+      setMessage(`Falha ao atualizar o texto: ${error.message}`);
     }
   };
 

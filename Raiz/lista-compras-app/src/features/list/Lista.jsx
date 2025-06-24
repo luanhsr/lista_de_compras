@@ -1,7 +1,7 @@
 // src/components/Lista.jsx
 import React, { useState, useEffect } from 'react';
-import Produto from './Produto';
-import ModalConfirmacao from './ModalConfirmacao';
+import Produto from '../produto/Produto';
+import ModalConfirmacao from '../modal-confirmacao/ModalConfirmacao';
 import styles from './Lista.module.css';
 
 const TrashIcon = () => <span style={{ cursor: 'pointer' }}>🗑️</span>;

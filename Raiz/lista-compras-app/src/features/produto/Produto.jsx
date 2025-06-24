@@ -1,6 +1,6 @@
 // src/components/Produto.jsx
 import React, { useState, useEffect } from 'react';
-import ModalConfirmacao from './ModalConfirmacao'; // Importação já existente, agora usada para salvar
+import ModalConfirmacao from '../modal-confirmacao/ModalConfirmacao';
 import styles from './Produto.module.css';
 
 const TrashIcon = () => <span style={{ cursor: 'pointer' }}>🗑️</span>;
