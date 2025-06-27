@@ -1,5 +1,5 @@
 // src/App.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // Importe o useCallback
 import Header from './features/header/Header';
 import ListContainer from './features/list/ListContainer';
 import Footer from './features/footer/Footer';
@@ -84,10 +84,14 @@ function App() {
     setIsModalTetoOpen(false);
   };
   
-  const handleRemoverListaApp = (idLista) => setListas(p => p.filter(l => l.id !== idLista));
-  const handleEditarNomeLista = (idLista, novoNome) => setListas(p => p.map(l => l.id === idLista ? { ...l, nome: novoNome } : l));
-  const handleToggleEssencial = (idLista) => setListas(p => p.map(l => l.id === idLista ? { ...l, essencial: !l.essencial } : l));
-  const handleValorListaChange = (idLista, novoValor) => setListas(p => p.map(l => l.id === idLista ? { ...l, valor: novoValor } : l));
+  // --- CORREÇÃO APLICADA AQUI ---
+  // Envolvemos todas as funções de manipulação de lista com useCallback
+  // para que elas não sejam recriadas a cada renderização, evitando o loop.
+  const handleRemoverListaApp = useCallback((idLista) => setListas(p => p.filter(l => l.id !== idLista)), []);
+  const handleEditarNomeLista = useCallback((idLista, novoNome) => setListas(p => p.map(l => l.id === idLista ? { ...l, nome: novoNome } : l)), []);
+  const handleToggleEssencial = useCallback((idLista) => setListas(p => p.map(l => l.id === idLista ? { ...l, essencial: !l.essencial } : l)), []);
+  const handleValorListaChange = useCallback((idLista, novoValor) => setListas(p => p.map(l => l.id === idLista ? { ...l, valor: novoValor } : l)), []);
+
 
   const tetoAtualNumerico = parseFloat(tetoGastos.replace(/\./g, "").replace(",", "."));
   const valorTotalCompraNumerico = listas.reduce((soma, lista) => soma + lista.valor, 0);
@@ -184,4 +188,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

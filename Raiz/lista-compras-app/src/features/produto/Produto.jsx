@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import ModalConfirmacao from '../modal-confirmacao/ModalConfirmacao';
 import styles from './Produto.module.css';
+import { addProduto } from './Produto.service';
 
 const TrashIcon = () => <span style={{ cursor: 'pointer' }}>🗑️</span>;
-// << NOVO ÍCONE >>
 const SaveIcon = () => <span style={{ cursor: 'pointer' }}>💾</span>;
 
 
@@ -26,8 +26,7 @@ const Produto = ({
   const [marcaNome, setMarcaNome] = useState(marcaNomeInicial);
   const [marcaQualidade, setMarcaQualidade] = useState(marcaQualidadeInicial);
   const [comprado, setComprado] = useState(compradoInicial);
-
-  // << NOVO ESTADO para o modal de salvar >>
+  
   const [modalSalvarProps, setModalSalvarProps] = useState(null);
 
   useEffect(() => {
@@ -68,16 +67,36 @@ const Produto = ({
     }
   };
 
-  // << NOVA FUNÇÃO para o clique no botão de salvar >>
-  const handleSaveAttempt = () => {
-    setModalSalvarProps({
-      mensagem: "Função de salvar produto será adicionada em breve.",
-      onConfirm: () => setModalSalvarProps(null),
-      onCancel: () => setModalSalvarProps(null),
-      textoConfirmar: 'Ok',
-      textoCancelar: 'Fechar',
-      tipo: 'padrao'
-    });
+  const handleSaveAttempt = async () => {
+    try {
+      const produtoData = {
+        nome,
+        qtd,
+        precoUnitario,
+        marcaNome,
+        marcaQualidade,
+        comprado,
+      };
+      await addProduto(produtoData);
+      setModalSalvarProps({
+        mensagem: `Produto "${nome}" salvo com sucesso!`,
+        onConfirm: () => setModalSalvarProps(null),
+        onCancel: () => setModalSalvarProps(null),
+        textoConfirmar: 'Ok',
+        textoCancelar: 'Fechar',
+        tipo: 'padrao'
+      });
+    } catch (error) {
+      console.error("Erro ao salvar o produto:", error);
+      setModalSalvarProps({
+        mensagem: `Falha ao salvar o produto: ${error.message}`,
+        onConfirm: () => setModalSalvarProps(null),
+        onCancel: () => setModalSalvarProps(null),
+        textoConfirmar: 'Ok',
+        textoCancelar: 'Fechar',
+        tipo: 'padrao'
+      });
+    }
   };
 
   const getMarcaQualidadeClass = () => {
@@ -96,7 +115,6 @@ const Produto = ({
           />
         </div>
 
-        {/* --- DEMAIS COLUNAS DE DADOS (QTD, PREÇO, MARCA...) --- */}
         <div className={styles.colunaQtd}>
           <label htmlFor={`qtd-${idReact}`} className={styles.label}>QTD</label>
           <input type="text" inputMode="decimal" id={`qtd-${idReact}`} value={qtd} onChange={handleNumberInputChange(setQtd)} className={`${styles.inputField} ${styles.inputNumber}`} disabled={comprado}/>
@@ -122,14 +140,12 @@ const Produto = ({
           </select>
         </div>
         
-        {/* << ALTERAÇÃO: Agrupando as ações finais em um único contêiner >> */}
         <div className={styles.areaAcoes}>
           <button onClick={handleSaveAttempt} className={`${styles.actionButton} ${styles.saveButton}`} title="Salvar produto" disabled={comprado}>
             <SaveIcon />
           </button>
 
           <div className={styles.compraContainer}>
-            {/* O texto "Comprou?" só aparece se o produto NÃO estiver comprado */}
             {!comprado && <span className={styles.compraLabel}>Comprou?</span>}
             <input
               type="checkbox"
@@ -146,7 +162,6 @@ const Produto = ({
         </div>
       </div>
 
-      {/* Renderiza o novo modal se ele estiver ativo */}
       {modalSalvarProps && <ModalConfirmacao {...modalSalvarProps} />}
     </>
   );

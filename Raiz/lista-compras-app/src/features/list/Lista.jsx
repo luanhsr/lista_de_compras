@@ -1,5 +1,5 @@
 // src/components/Lista.jsx
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react'; // Importe o useCallback
 import Produto from '../produto/Produto';
 import ModalConfirmacao from '../modal-confirmacao/ModalConfirmacao';
 import styles from './Lista.module.css';
@@ -27,10 +27,29 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
     }, 5000); 
 
     return () => clearTimeout(timer);
-  }, []); 
+  }, []);
+
+  useEffect(() => {
+    setEssencialState(essencialInicial);
+  }, [essencialInicial]);
+
+  useEffect(() => {
+    const totalDaListaNumerico = produtos
+      .filter(p => p.comprado) 
+      .reduce((sum, p) => sum + (p.precoTotal || 0), 0);
+      
+    setValorTotalLista(totalDaListaNumerico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
+    
+    if (onTotalChange) {
+      onTotalChange(idLista, totalDaListaNumerico);
+    }
+  }, [produtos, idLista, onTotalChange]); // Adicionei onTotalChange para seguir as boas práticas, mas a correção principal é abaixo.
 
 
-  const handleProdutoDataChangeNoLista = (idReactProduto, dadosProdutoAtualizado) => {
+  // --- CORREÇÃO APLICADA AQUI ---
+  // A função é envolvida com useCallback para que ela não seja recriada em cada renderização,
+  // quebrando o loop infinito no useEffect do componente Produto.
+  const handleProdutoDataChangeNoLista = useCallback((idReactProduto, dadosProdutoAtualizado) => {
     setProdutos(prevProdutos =>
       prevProdutos.map(p =>
         p.idReact === idReactProduto
@@ -41,23 +60,7 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
           : p
       )
     );
-  };
-  
-  useEffect(() => {
-    setEssencialState(essencialInicial);
-
-    const totalDaListaNumerico = produtos
-      .filter(p => p.comprado) 
-      .reduce((sum, p) => sum + (p.precoTotal || 0), 0);
-      
-    setValorTotalLista(totalDaListaNumerico.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }));
-    
-    if (onTotalChange) {
-      onTotalChange(idLista, totalDaListaNumerico);
-    }
-    
-  }, [produtos, essencialInicial, idLista, onTotalChange]);
-
+  }, []); // O array de dependências está vazio porque setProdutos é estável.
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
