@@ -140,7 +140,7 @@ function App() {
 
   return (
     <div className="app-container">
-      <SQLiteTest />
+      
       
       <Header
         onProfileClick={handleProfileClick}

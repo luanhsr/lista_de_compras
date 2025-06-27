@@ -124,10 +124,12 @@
 
 .addProdutoArea {
   margin-bottom: var(--espacamento-md);
+  display: flex;
+  gap: var(--espacamento-md);
 }
 
 .addProdutoButtonLista {
-  width: 100%;
+  flex: 1; /* Faz os botões dividirem o espaço igualmente */
   padding: var(--espacamento-sm) var(--espacamento-md);
   background-color: var(--cor-acento-primario);
   color: var(--cor-texto-destaque);
@@ -142,8 +144,16 @@
   gap: var(--espacamento-sm);
   transition: background-color 0.2s ease;
 }
+
 .addProdutoButtonLista:hover {
   background-color: var(--cor-acento-primario-hover);
+}
+
+.addProdutoButtonSecundario {
+  background-color: var(--cor-acento-secundario);
+}
+.addProdutoButtonSecundario:hover {
+  background-color: var(--cor-acento-secundario-hover);
 }
 
 .produtosContainer {
@@ -157,4 +167,12 @@
   color: var(--cor-texto-secundario);
   padding: var(--espacamento-lg) 0;
   font-style: italic;
+}
+
+/* --- NOVO: Media Query para Responsividade dos Botões --- */
+@media (max-width: 480px) {
+  .addProdutoArea {
+    flex-direction: column;
+    gap: var(--espacamento-sm); /* Reduzindo um pouco o espaço para o layout de coluna */
+  }
 }

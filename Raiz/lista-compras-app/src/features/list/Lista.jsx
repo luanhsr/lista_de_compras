@@ -1,11 +1,13 @@
 // src/components/Lista.jsx
-import React, { useState, useEffect, useCallback } from 'react'; // Importe o useCallback
+import React, { useState, useEffect, useCallback } from 'react';
 import Produto from '../produto/Produto';
 import ModalConfirmacao from '../modal-confirmacao/ModalConfirmacao';
+import ModalBuscaProduto from '../modal-busca-produto/ModalBuscaProduto'; // Verifique se o caminho está correto
 import styles from './Lista.module.css';
 
 const TrashIcon = () => <span style={{ cursor: 'pointer' }}>🗑️</span>;
 const PlusIcon = () => <span style={{fontSize: '1.2em'}}>+</span>;
+const LoadIcon = () => <span style={{fontSize: '1em'}}>🗄️</span>;
 
 const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNomeChange, onToggleEssencial, onTotalChange }) => {
   const [nomeListaState, setNomeListaState] = useState(nomeInicial);
@@ -17,6 +19,7 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
 
   const [modalListaConfirmacaoProps, setModalListaConfirmacaoProps] = useState(null); 
   const [modalProdutoConfirmacaoProps, setModalProdutoConfirmacaoProps] = useState(null); 
+  const [isBuscaProdutoOpen, setIsBuscaProdutoOpen] = useState(false); // Novo estado para o modal de busca
 
   const [highlightClass, setHighlightClass] = useState('');
 
@@ -43,12 +46,9 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
     if (onTotalChange) {
       onTotalChange(idLista, totalDaListaNumerico);
     }
-  }, [produtos, idLista, onTotalChange]); // Adicionei onTotalChange para seguir as boas práticas, mas a correção principal é abaixo.
+  }, [produtos, idLista, onTotalChange]);
 
 
-  // --- CORREÇÃO APLICADA AQUI ---
-  // A função é envolvida com useCallback para que ela não seja recriada em cada renderização,
-  // quebrando o loop infinito no useEffect do componente Produto.
   const handleProdutoDataChangeNoLista = useCallback((idReactProduto, dadosProdutoAtualizado) => {
     setProdutos(prevProdutos =>
       prevProdutos.map(p =>
@@ -60,7 +60,7 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
           : p
       )
     );
-  }, []); // O array de dependências está vazio porque setProdutos é estável.
+  }, []);
 
   const handleToggleExpand = () => {
     setIsExpanded(!isExpanded);
@@ -87,6 +87,11 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
     if (!isExpanded) setIsExpanded(true);
   };
   
+  // Função para o botão "Carregar Produto" agora abre o modal
+  const handleCarregarProdutoClick = () => {
+    setIsBuscaProdutoOpen(true);
+  };
+
   const handleNomeListaChange = (e) => {
     const novoNome = e.target.value;
     setNomeListaState(novoNome);
@@ -163,10 +168,14 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
         {isExpanded && (
           <div className={styles.listaBody}>
             <div className={styles.addProdutoArea}>
-              <button onClick={handleAddProduto} className={styles.addProdutoButtonLista} title="Adicionar novo produto a esta lista">
-                <PlusIcon /> Adicionar Produto
+              <button onClick={handleAddProduto} className={styles.addProdutoButtonLista} title="Adicionar um novo produto a esta lista">
+                <PlusIcon /> Criar novo Produto
+              </button>
+              <button onClick={handleCarregarProdutoClick} className={`${styles.addProdutoButtonLista} ${styles.addProdutoButtonSecundario}`} title="Carregar produto salvo anteriormente">
+                <LoadIcon /> Carregar Produto
               </button>
             </div>
+            
             <div className={styles.produtosContainer}>
               {produtos.length === 0 ? (
                 <p className={styles.semProdutosMsg}>Nenhum produto adicionado a esta lista ainda.</p>
@@ -208,6 +217,12 @@ const Lista = ({ id: idLista, nomeInicial, essencialInicial, onRemoveLista, onNo
           tipo={modalProdutoConfirmacaoProps.tipo}
         />
       )}
+      
+      {/* Renderização do novo modal */}
+      <ModalBuscaProduto 
+        isOpen={isBuscaProdutoOpen} 
+        onClose={() => setIsBuscaProdutoOpen(false)} 
+      />
     </>
   );
 };

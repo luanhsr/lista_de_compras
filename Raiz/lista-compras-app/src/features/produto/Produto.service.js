@@ -1,6 +1,5 @@
 import { db } from '../../data/db';
 
-
 export const addProduto = async (produto) => {
   if (!produto || !produto.nome || !produto.nome.trim()) {
     throw new Error("O nome do produto não pode estar vazio.");

@@ -1,0 +1,187 @@
+/* src/features/modal-busca-produto/ModalBuscaProduto.module.css */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cor-fundo-overlay);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: var(--espacamento-md);
+}
+
+.modalContent {
+  background-color: var(--cor-fundo-secundario);
+  padding: var(--espacamento-lg);
+  border-radius: var(--raio-borda-padrao);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+  border: 1px solid var(--cor-borda-sutil);
+  width: 90vw; 
+  max-width: 700px;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modalTitle {
+  font-size: 1.6rem;
+  font-weight: var(--peso-fonte-destacado);
+  color: var(--cor-texto-destaque);
+  margin-top: 0;
+  margin-bottom: var(--espacamento-md);
+  text-align: center;
+}
+
+.searchContainer {
+  margin-bottom: var(--espacamento-md);
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  font-size: 1.1rem;
+  border-radius: var(--raio-borda-padrao);
+  border: 1px solid var(--cor-borda-input);
+  background-color: var(--cor-fundo-terciario);
+  color: var(--cor-texto-primario);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.searchInput:focus {
+  outline: none;
+  border-color: var(--cor-borda-input-foco);
+  box-shadow: 0 0 0 3px var(--cor-foco-sombra);
+}
+
+.productListContainer {
+  flex-grow: 1; /* Ocupa o espaço restante */
+  overflow-y: auto; /* Adiciona scroll se a lista for longa */
+  margin-bottom: var(--espacamento-lg);
+  padding-right: var(--espacamento-sm); /* Espaço para a barra de scroll */
+}
+
+/* Scrollbar styling */
+.productListContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.productListContainer::-webkit-scrollbar-track {
+  background: var(--cor-fundo-principal);
+}
+.productListContainer::-webkit-scrollbar-thumb {
+  background-color: var(--cor-borda-input);
+  border-radius: var(--raio-borda-padrao);
+}
+
+.produtoItem {
+  display: flex;
+  align-items: center;
+  gap: var(--espacamento-md);
+  padding: var(--espacamento-md) 0;
+  border-bottom: 1px solid var(--cor-borda-sutil);
+}
+.produtoItem:last-child {
+  border-bottom: none;
+}
+
+.produtoCheckbox input {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--cor-acento-primario);
+  cursor: pointer;
+}
+
+.produtoInfo {
+  flex-grow: 1;
+}
+
+.produtoNome {
+  color: var(--cor-texto-destaque);
+  font-weight: var(--peso-fonte-destacado);
+  font-size: 1.1rem;
+  margin-bottom: var(--espacamento-xs);
+}
+
+.produtoDetalhes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espacamento-md);
+  color: var(--cor-texto-secundario);
+  font-size: var(--tamanho-fonte-pequena);
+}
+
+.produtoDetalhes strong {
+  color: var(--cor-texto-primario);
+  font-weight: var(--peso-fonte-normal);
+}
+
+.qualidadeTag {
+  padding: 2px 8px;
+  border-radius: var(--raio-borda-padrao);
+  font-weight: bold;
+  text-transform: capitalize;
+  font-size: 0.9em;
+}
+
+.qualidadeBoa {
+  background-color: var(--cor-sucesso-fundo-tag);
+  color: var(--cor-sucesso-texto-tag);
+}
+
+.qualidadeRuim {
+  background-color: var(--cor-erro-fundo-tag);
+  color: var(--cor-erro-texto-tag);
+}
+
+.qualidadeNaoSei {
+  background-color: var(--cor-aviso-fundo-tag);
+  color: var(--cor-aviso-texto-tag);
+}
+
+.produtoAcoes {
+  display: flex;
+  gap: var(--espacamento-sm);
+}
+
+.actionButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.2s ease, transform 0.2s ease;
+  padding: var(--espacamento-xs);
+  color: var(--cor-texto-secundario);
+}
+.actionButton:hover {
+  transform: scale(1.1);
+  color: var(--cor-texto-destaque);
+}
+
+.deleteButton:hover {
+  color: var(--cor-erro);
+}
+
+.footerActions {
+  padding-top: var(--espacamento-md);
+  border-top: 1px solid var(--cor-borda-sutil);
+}
+
+.adicionarButton {
+  width: 100%;
+  padding: var(--espacamento-sm) var(--espacamento-md);
+  border-radius: var(--raio-borda-padrao);
+  cursor: pointer;
+  font-weight: var(--peso-fonte-destacado);
+  font-size: 1.1rem;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+  background-color: var(--cor-sucesso);
+  color: var(--cor-texto-destaque);
+  border-color: var(--cor-sucesso);
+}
+
+.adicionarButton:hover {
+  background-color: var(--cor-sucesso-hover);
+  border-color: var(--cor-sucesso-hover);
+}
